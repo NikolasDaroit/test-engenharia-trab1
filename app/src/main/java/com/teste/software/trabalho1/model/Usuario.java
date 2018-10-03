@@ -6,15 +6,15 @@ import lombok.Data;
 
 @Data
 public abstract class Usuario {
-	private String email;
-	private String senha;
-	private String nome;
-	private String cidade;
-	private String horario_contato;
-	private Integer tel_celular;
-	private Integer tel_fixo;
-	private Integer cod_area;
-	private String operadora;
-	private Boolean is_admin;
-	private ArrayList<Visita> visitas;
+	protected String email;
+	protected String senha;
+	protected String nome;
+	protected String cidade;
+	protected String horario_contato;
+	protected Integer tel_celular;
+	protected Integer tel_fixo;
+	protected Integer cod_area;
+	protected String operadora;
+	protected Boolean is_admin;
+	protected ArrayList<Visita> visitas;
 }
