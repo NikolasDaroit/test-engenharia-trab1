@@ -23,6 +23,7 @@ public class UsuarioTest {
 	private VisitaController visitaController;
 	private Visita visita;
 	private UsuarioBasico usuarioBasico, usuarioBasico2;
+	private List usrList;
 	
 	@Before
 	public void setup() {
@@ -33,7 +34,7 @@ public class UsuarioTest {
 		usuarioBasico = new UsuarioBasico("nome", "login", "senha", "cidade", 989989, 51, "tim", 3483999, "22h", "email@email.com");
 		usuarioBasico2 = new UsuarioBasico("nome2", "login2", "senha", "cidade", 989989, 51, "tim", 3483999, "22h", "email@email.com");
 		
-		List usrList = new ArrayList<String>();
+		usrList = new ArrayList<String>();
 		usrList.add(usuarioBasico.toString());
 		usrList.add(usuarioBasico2.toString());
 		/*
@@ -90,11 +91,11 @@ public class UsuarioTest {
 	// basico - visita
 	@Test
 	public void testCadastrarVisita() {
-		assertThat(usuarioBasicoController.cadastrarVisita("codigo", usuarioBasico, "email_usuario", "data_visita", "hora_visita", "nome_instituicao", "tipo_instituicao", "cidade_instituicao", 2342342, 234, false, true, true, "conteudo")).isInstanceOf(Visita.class);
+		assertThat(usuarioBasicoController.cadastrarVisita("codigo", usuarioBasico, "email_usuario", "data_visita", "hora_visita", "nome_instituicao", "tipo_instituicao", "cidade_instituicao", "2342342", 234, false, true, true, "conteudo")).isInstanceOf(Visita.class);
 	}
 	@Test
 	public void testCadastrarVisitaFaltandoAlgo() {
-		assertThatThrownBy(() -> { usuarioBasicoController.cadastrarVisita("", usuarioBasico, "email_usuario", "data_visita", "hora_visita", "nome_instituicao", "tipo_instituicao", "cidade_instituicao", 2342342, 234, false, true, true, "conteudo"); })
+		assertThatThrownBy(() -> { usuarioBasicoController.cadastrarVisita("", usuarioBasico, "email_usuario", "data_visita", "hora_visita", "nome_instituicao", "tipo_instituicao", "cidade_instituicao", "2342342", 234, false, true, true, "conteudo"); })
 		.isInstanceOf(IllegalArgumentException.class);
 	}
 }
