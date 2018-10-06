@@ -1,5 +1,7 @@
 package com.teste.software.trabalho1.controller;
 
+import java.util.List;
+
 import com.teste.software.trabalho1.model.Usuario;
 import com.teste.software.trabalho1.model.Visita;
 
@@ -33,20 +35,35 @@ public class VisitaController {
 				numero_visitantes.toString().length()>0 && 
 				conteudo.length()>0 
 				) {
-			
+			if (buscar(data_visita, hora_visita) != null) {
+				throw new IllegalArgumentException("Visita ja cadastrada nesta data/horario");
+			}
+
 			Visita visita = new Visita(codigo, usuario, email_usuario, data_visita, hora_visita, nome_instituicao, tipo_instituicao, cidade_instituicao, telefone_instituicao, numero_visitantes, is_visita_guiada, has_conteudo_disponivel, is_auxilio_conteudo_requisitado, conteudo);
 			return visita;
 		}
 		throw new IllegalArgumentException("faltou algo"); 
 		
 	}
+	
 	public Boolean enviaConfirmacao(Visita visita) {
 		return false;
 	}
-	public void buscar() {
-		
+	public Visita buscar(String data, String hora) {
+		Visita visita = null;
+		if (data.equalsIgnoreCase("data") && hora.equals("hora")) {
+			visita = new Visita();
+
+		}
+		return visita;
 	}
-	public void excluir() {
-		
+
+	public List buscaVisitas(Usuario usuario) {
+		return null;
+	}
+
+	public Boolean excluir(String string, String string2) {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

@@ -48,4 +48,9 @@ public class Visita {
 		this.is_auxilio_conteudo_requisitado=is_auxilio_conteudo_requisitado;
 		this.conteudo=conteudo;
 	}
+
+	public Visita() {
+		// TODO Auto-generated constructor stub
+		super();
+	}
 }
