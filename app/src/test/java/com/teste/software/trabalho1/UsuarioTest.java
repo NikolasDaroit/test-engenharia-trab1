@@ -27,6 +27,7 @@ public class UsuarioTest {
 	private Visita visita;
 	private UsuarioBasico usuarioBasico, usuarioBasico2;
 	private List usrList;
+	private List visitaList;
 	
 	@Before
 	public void setup() {
@@ -39,6 +40,8 @@ public class UsuarioTest {
 		usrList = new ArrayList<String>();
 		usrList.add(usuarioBasico.toString());
 		usrList.add(usuarioBasico2.toString());
+		visitaList = new ArrayList<String>(); 
+		visitaList.add(visita);
 		/*
 		when( usuarioBasicoController.buscarMensagem() ).thenReturn(new String("Some simple message"));
 		when( usuarioBasicoController.inserirMensagem() ).thenReturn(new Boolean(true));
