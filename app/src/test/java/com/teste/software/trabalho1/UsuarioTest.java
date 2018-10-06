@@ -27,7 +27,7 @@ public class UsuarioTest {
 	private Visita visita;
 	private UsuarioBasico usuarioBasico, usuarioBasico2;
 	private List usrList;
-	private List visitaList;
+	private ArrayList visitaList;
 	
 	@Before
 	public void setup() {
@@ -40,7 +40,7 @@ public class UsuarioTest {
 		usrList = new ArrayList<String>();
 		usrList.add(usuarioBasico.toString());
 		usrList.add(usuarioBasico2.toString());
-		visitaList = new ArrayList<String>(); 
+		visitaList = new ArrayList<Visita>();
 		visitaList.add(visita);
 		/*
 		when( usuarioBasicoController.buscarMensagem() ).thenReturn(new String("Some simple message"));
@@ -58,11 +58,12 @@ public class UsuarioTest {
 		when( usuarioAdminController.consultarDadosUsuario()).thenReturn(usrList);
 		when( visitaController.enviaConfirmacao(visita)).thenReturn(new Boolean(true));
 		when(visita.getUsuario()).thenReturn(usuarioBasico);
+		when(usuarioBasico.getNome()).thenReturn("Nome");
 		when(visita.getData_visita()).thenReturn("09/11/2018");
 		when(visita.getHora_visita()).thenReturn("15:00");
 		when( usuarioAdminController.buscarMensagem() ).thenReturn(new String("Some more complex message"));
 		when( usuarioAdminController.inserirMensagem() ).thenReturn(new Boolean(true));
-		when( usuarioAdminController.consultarDadosTodasVisitas()).thenReturn(new String("Data: 12/10/2018\nHora: 18:10\nLoguin do Usuário: loguin_user\nNome: nome_usuario")); 
+		//when( usuarioAdminController.consultarDadosTodasVisitas(visitaList)).thenReturn(visitaList); 
 		
 		when( usuarioAdminController.editarVisita(visita)).thenReturn(new Boolean(true));
 	}
@@ -95,11 +96,11 @@ public class UsuarioTest {
 	public void testConsultarDadosUsuario() {
 		assertThat(usuarioAdminController.consultarDadosUsuario()).hasSize(2).contains(usuarioBasico.toString(), usuarioBasico2.toString());
 	}
-	//precisa retornar nome e o loguin de todas as visitas.
 	@Test
 	public void testConsultarDadosVisita() {
-		assertThat(usuarioAdminController.consultarDadosTodasVisitas()).isEqualTo("Data: 12/10/2018\nHora: 18:10\nLoguin do Usuário: loguin_user\nNome: nome_usuario")
-																	   .isNotNull();
+		assertThat(usuarioAdminController.consultarDadosTodasVisitas(visitaList)).isEqualTo("String");
+																	   
+																	   
 	}
 	// basico - visita
 	@Test
