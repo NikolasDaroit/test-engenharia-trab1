@@ -17,4 +17,9 @@ public abstract class Usuario {
 	protected String operadora;
 	protected Boolean is_admin;
 	protected ArrayList<Visita> visitas;
+	
+	public String getNome() {
+		return nome;
+	}
+
 }

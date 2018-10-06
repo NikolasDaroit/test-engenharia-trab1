@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import com.teste.software.trabalho1.controller.UsuarioAdministradorController;
 import com.teste.software.trabalho1.controller.UsuarioBasicoController;
@@ -16,6 +17,8 @@ import com.teste.software.trabalho1.controller.VisitaController;
 import com.teste.software.trabalho1.model.Usuario;
 import com.teste.software.trabalho1.model.UsuarioBasico;
 import com.teste.software.trabalho1.model.Visita;
+
+import net.bytebuddy.dynamic.scaffold.MethodRegistry.Handler.ForAbstractMethod;
 
 public class UsuarioTest {
 	private UsuarioBasicoController usuarioBasicoController;
@@ -33,7 +36,6 @@ public class UsuarioTest {
 		visita = mock(Visita.class);
 		usuarioBasico = new UsuarioBasico("nome", "login", "senha", "cidade", 989989, 51, "tim", 3483999, "22h", "email@email.com");
 		usuarioBasico2 = new UsuarioBasico("nome2", "login2", "senha", "cidade", 989989, 51, "tim", 3483999, "22h", "email@email.com");
-		
 		usrList = new ArrayList<String>();
 		usrList.add(usuarioBasico.toString());
 		usrList.add(usuarioBasico2.toString());
@@ -51,12 +53,14 @@ public class UsuarioTest {
 		when( usuarioBasicoController.toString()).thenReturn("Nome: nome\nEmail: email@email.com");
 		*/
 		when( usuarioAdminController.consultarDadosUsuario()).thenReturn(usrList);
-		
 		when( visitaController.enviaConfirmacao(visita)).thenReturn(new Boolean(true));
-		
+		when(visita.getUsuario()).thenReturn(usuarioBasico);
+		when(visita.getData_visita()).thenReturn("09/11/2018");
+		when(visita.getHora_visita()).thenReturn("15:00");
 		when( usuarioAdminController.buscarMensagem() ).thenReturn(new String("Some more complex message"));
 		when( usuarioAdminController.inserirMensagem() ).thenReturn(new Boolean(true));
-		when( usuarioAdminController.consultarDadosVisita(visita)).thenReturn(new String("Data: 12/10/2018\nHora: 18:10"));
+		when( usuarioAdminController.consultarDadosTodasVisitas()).thenReturn(new String("Data: 12/10/2018\nHora: 18:10\nLoguin do Usuário: loguin_user\nNome: nome_usuario")); 
+		
 		when( usuarioAdminController.editarVisita(visita)).thenReturn(new Boolean(true));
 	}
 	// basico - usuario	
@@ -88,6 +92,12 @@ public class UsuarioTest {
 	public void testConsultarDadosUsuario() {
 		assertThat(usuarioAdminController.consultarDadosUsuario()).hasSize(2).contains(usuarioBasico.toString(), usuarioBasico2.toString());
 	}
+	//precisa retornar nome e o loguin de todas as visitas.
+	@Test
+	public void testConsultarDadosVisita() {
+		assertThat(usuarioAdminController.consultarDadosTodasVisitas()).isEqualTo("Data: 12/10/2018\nHora: 18:10\nLoguin do Usuário: loguin_user\nNome: nome_usuario")
+																	   .isNotNull();
+	}
 	// basico - visita
 	@Test
 	public void testCadastrarVisita() {
@@ -98,4 +108,5 @@ public class UsuarioTest {
 		assertThatThrownBy(() -> { usuarioBasicoController.cadastrarVisita("", usuarioBasico, "email_usuario", "data_visita", "hora_visita", "nome_instituicao", "tipo_instituicao", "cidade_instituicao", "2342342", 234, false, true, true, "conteudo"); })
 		.isInstanceOf(IllegalArgumentException.class);
 	}
+	
 }

@@ -7,7 +7,7 @@ import com.teste.software.trabalho1.model.Visita;
 
 public class UsuarioAdministradorController extends UsuarioController{
 	public List consultarDadosUsuario(){ return null;}
-	public String consultarDadosVisita(Visita visita){return null;}
+	public String consultarDadosTodasVisitas(){return null;}
 	public Boolean editarVisita(Visita visita){return false;}
 	
 }

@@ -48,9 +48,34 @@ public class Visita {
 		this.is_auxilio_conteudo_requisitado=is_auxilio_conteudo_requisitado;
 		this.conteudo=conteudo;
 	}
-
+	
 	public Visita() {
 		// TODO Auto-generated constructor stub
 		super();
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getData_visita() {
+		return data_visita;
+	}
+
+	public void setData_visita(String data_visita) {
+		this.data_visita = data_visita;
+	}
+
+	public String getHora_visita() {
+		return hora_visita;
+	}
+
+	public void setHora_visita(String hora_visita) {
+		this.hora_visita = hora_visita;
+	}
+	
 }
