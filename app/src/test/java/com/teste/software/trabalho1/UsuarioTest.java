@@ -15,6 +15,7 @@ import com.teste.software.trabalho1.controller.UsuarioAdministradorController;
 import com.teste.software.trabalho1.controller.UsuarioBasicoController;
 import com.teste.software.trabalho1.controller.VisitaController;
 import com.teste.software.trabalho1.model.Usuario;
+import com.teste.software.trabalho1.model.UsuarioAdministrador;
 import com.teste.software.trabalho1.model.UsuarioBasico;
 import com.teste.software.trabalho1.model.Visita;
 
@@ -26,8 +27,9 @@ public class UsuarioTest {
 	private VisitaController visitaController;
 	private Visita visita;
 	private UsuarioBasico usuarioBasico, usuarioBasico2;
+	private UsuarioAdministrador usuarioAdmin;
 	private List usrList;
-	private ArrayList visitaList;
+	private ArrayList<Visita> visitaList;
 	
 	@Before
 	public void setup() {
@@ -36,6 +38,7 @@ public class UsuarioTest {
 		visitaController = mock(VisitaController.class);
 		visita = mock(Visita.class);
 		usuarioBasico = new UsuarioBasico("nome", "login", "senha", "cidade", 989989, 51, "tim", 3483999, "22h", "email@email.com");
+		usuarioAdmin = new UsuarioAdministrador("nome", "login", "senha", "cidade", 989989, 51, "tim", 3483999, "22h", "email@email.com");
 		usuarioBasico2 = new UsuarioBasico("nome2", "login2", "senha", "cidade", 989989, 51, "tim", 3483999, "22h", "email@email.com");
 		usrList = new ArrayList<String>();
 		usrList.add(usuarioBasico.toString());
@@ -57,13 +60,11 @@ public class UsuarioTest {
 		*/
 		when( usuarioAdminController.consultarDadosUsuario()).thenReturn(usrList);
 		when( visitaController.enviaConfirmacao(visita)).thenReturn(new Boolean(true));
-		when(visita.getUsuario()).thenReturn(usuarioBasico);
-		when(usuarioBasico.getNome()).thenReturn("Nome");
+		when(visita.getUsuario()).thenReturn(usuarioAdmin);
 		when(visita.getData_visita()).thenReturn("09/11/2018");
 		when(visita.getHora_visita()).thenReturn("15:00");
 		when( usuarioAdminController.buscarMensagem() ).thenReturn(new String("Some more complex message"));
 		when( usuarioAdminController.inserirMensagem() ).thenReturn(new Boolean(true));
-		//when( usuarioAdminController.consultarDadosTodasVisitas(visitaList)).thenReturn(visitaList); 
 		
 		when( usuarioAdminController.editarVisita(visita)).thenReturn(new Boolean(true));
 	}
@@ -113,4 +114,24 @@ public class UsuarioTest {
 		.isInstanceOf(IllegalArgumentException.class);
 	}
 	
+	@Test
+	public void asdasd() {
+//		System.out.println(vissyitaList);
+		
+		for (Visita visita :  visitaList) {
+//			System.out.println(visita.getUsuario());
+			StringBuilder dadosDeTodasAsVisitas = new StringBuilder(); 
+			dadosDeTodasAsVisitas.append(visita.getUsuario().getNome() + "\n" +
+					visita.getUsuario().getEmail() + "\n" +
+					visita.getData_visita() + "\n" +
+					visita.getHora_visita());
+			System.out.println(dadosDeTodasAsVisitas.toString());
+//			System.out.println(visita.getUsuario().getNome() + "\n" +
+//										visita.getUsuario().getEmail() + "\n" +
+//										visita.getData_visita() + "\n" +
+//										visita.getHora_visita());
+		}
+//		System.out.println(visitaList[0].get);
+		System.out.println(usuarioAdminController.consultarDadosTodasVisitas(visitaList));
+	}
 }
