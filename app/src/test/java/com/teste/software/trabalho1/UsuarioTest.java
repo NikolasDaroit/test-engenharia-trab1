@@ -44,29 +44,16 @@ public class UsuarioTest {
 		usrList.add(usuarioBasico.toString());
 		usrList.add(usuarioBasico2.toString());
 		visitaList = new ArrayList<Visita>();
-		visitaList.add(visita);
-		/*
-		when( usuarioBasicoController.buscarMensagem() ).thenReturn(new String("Some simple message"));
-		when( usuarioBasicoController.inserirMensagem() ).thenReturn(new Boolean(true));
-		when( usuarioBasicoController.login("usr", "pass")).thenReturn(usuarioBasico);
-		when( usuarioBasicoController.verificarDados("usr") ).thenReturn(new Boolean(true));
-		when( usuarioBasicoController.salvarDados("nome", "login", "senha", "cidade", 989989, 51, "tim", 3483999, "22h", "email@email.com") ).thenReturn(new Boolean(true));
-		when( usuarioBasicoController.salvarDados("", "", "senha", "cidade", 989989, 51, "tim", 3483999, "22h", "email@email.com") ).thenThrow(new IllegalArgumentException("Campos requeridos"));
-		when( usuarioBasicoController.salvarDados("-- drop table", "", "senha", "c$idade", 989989, 51, "tim", 3483999, "22h", "email@email.com") ).thenThrow(new IllegalArgumentException("Caracteres invalidos"));
-		when( usuarioBasicoController.salvarDados("nome", "login", "senha", "cidade", 989989, 51, "tim", 3483999, "22h", "emailsemarrobaeponto") ).thenThrow(new IllegalArgumentException("Email invalido"));
-		when( usuarioBasicoController.cadastrarVisita()).thenReturn(mock(Visita.class));
-		when( usuarioBasicoController.excluirVisita(visita)).thenReturn(new Boolean(true));
-		when( usuarioBasicoController.toString()).thenReturn("Nome: nome\nEmail: email@email.com");
-		*/
+		
 		when( usuarioAdminController.consultarDadosUsuario()).thenReturn(usrList);
 		when( visitaController.enviaConfirmacao(visita)).thenReturn(new Boolean(true));
-		when(visita.getUsuario()).thenReturn(usuarioAdmin);
+		when(visita.getUsuario()).thenReturn(usuarioBasico);
 		when(visita.getData_visita()).thenReturn("09/11/2018");
 		when(visita.getHora_visita()).thenReturn("15:00");
 		when( usuarioAdminController.buscarMensagem() ).thenReturn(new String("Some more complex message"));
 		when( usuarioAdminController.inserirMensagem() ).thenReturn(new Boolean(true));
-		
 		when( usuarioAdminController.editarVisita(visita)).thenReturn(new Boolean(true));
+		visitaList.add(visita);
 	}
 	// basico - usuario	
 	@Test 
@@ -99,9 +86,7 @@ public class UsuarioTest {
 	}
 	@Test
 	public void testConsultarDadosVisita() {
-		assertThat(usuarioAdminController.consultarDadosTodasVisitas(visitaList)).isEqualTo("String");
-																	   
-																	   
+		assertThat(usuarioAdminController.consultarDadosTodasVisitas(visitaList)).isEqualTo("String");														   															   
 	}
 	// basico - visita
 	@Test
@@ -113,25 +98,5 @@ public class UsuarioTest {
 		assertThatThrownBy(() -> { usuarioBasicoController.cadastrarVisita("", usuarioBasico, "email_usuario", "data_visita", "hora_visita", "nome_instituicao", "tipo_instituicao", "cidade_instituicao", "2342342", 234, false, true, true, "conteudo"); })
 		.isInstanceOf(IllegalArgumentException.class);
 	}
-	
-	@Test
-	public void asdasd() {
-//		System.out.println(vissyitaList);
-		
-		for (Visita visita :  visitaList) {
-//			System.out.println(visita.getUsuario());
-			StringBuilder dadosDeTodasAsVisitas = new StringBuilder(); 
-			dadosDeTodasAsVisitas.append(visita.getUsuario().getNome() + "\n" +
-					visita.getUsuario().getEmail() + "\n" +
-					visita.getData_visita() + "\n" +
-					visita.getHora_visita());
-			System.out.println(dadosDeTodasAsVisitas.toString());
-//			System.out.println(visita.getUsuario().getNome() + "\n" +
-//										visita.getUsuario().getEmail() + "\n" +
-//										visita.getData_visita() + "\n" +
-//										visita.getHora_visita());
-		}
-//		System.out.println(visitaList[0].get);
-		System.out.println(usuarioAdminController.consultarDadosTodasVisitas(visitaList));
-	}
 }
+	
